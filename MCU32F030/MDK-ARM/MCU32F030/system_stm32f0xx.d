@@ -2,7 +2,7 @@ mcu32f030\system_stm32f0xx.o: ../Core/Src/system_stm32f0xx.c
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f030x6.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Include/core_cm0.h
-mcu32f030\system_stm32f0xx.o: D:\Program Files (x86)\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+mcu32f030\system_stm32f0xx.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdint.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Include/cmsis_version.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -13,7 +13,7 @@ mcu32f030\system_stm32f0xx.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_
 mcu32f030\system_stm32f0xx.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-mcu32f030\system_stm32f0xx.o: D:\Program Files (x86)\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+mcu32f030\system_stm32f0xx.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stddef.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc_ex.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h
 mcu32f030\system_stm32f0xx.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio_ex.h

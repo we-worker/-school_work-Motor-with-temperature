@@ -55,7 +55,6 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN EV */
 
@@ -150,25 +149,9 @@ void EXTI4_15_IRQHandler(void)
 
   /* USER CODE END EXTI4_15_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
-	exit4_FG++£»
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
 
   /* USER CODE END EXTI4_15_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM1 break, update, trigger and commutation interrupts.
-  */
-void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM1_BRK_UP_TRG_COM_IRQn 0 */
-
-  /* USER CODE END TIM1_BRK_UP_TRG_COM_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim1);
-	tim1_count_100us++;
-  /* USER CODE BEGIN TIM1_BRK_UP_TRG_COM_IRQn 1 */
-
-  /* USER CODE END TIM1_BRK_UP_TRG_COM_IRQn 1 */
 }
 
 /**
@@ -180,8 +163,6 @@ void TIM3_IRQHandler(void)
 
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
-	Fan_PWM=1-Fan_PWM;
-	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_9,(GPIO_PinState)Fan_PWM);
   /* USER CODE BEGIN TIM3_IRQn 1 */
 
   /* USER CODE END TIM3_IRQn 1 */
