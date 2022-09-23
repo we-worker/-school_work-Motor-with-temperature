@@ -1,0 +1,27 @@
+--cpu Cortex-M0
+"mcu32f030\startup_stm32f030x6.o"
+"mcu32f030\main.o"
+"mcu32f030\stm32f0xx_it.o"
+"mcu32f030\stm32f0xx_hal_msp.o"
+"mcu32f030\stm32f0xx_hal_adc.o"
+"mcu32f030\stm32f0xx_hal_adc_ex.o"
+"mcu32f030\stm32f0xx_hal_rcc.o"
+"mcu32f030\stm32f0xx_hal_rcc_ex.o"
+"mcu32f030\stm32f0xx_hal.o"
+"mcu32f030\stm32f0xx_hal_i2c.o"
+"mcu32f030\stm32f0xx_hal_i2c_ex.o"
+"mcu32f030\stm32f0xx_hal_gpio.o"
+"mcu32f030\stm32f0xx_hal_dma.o"
+"mcu32f030\stm32f0xx_hal_cortex.o"
+"mcu32f030\stm32f0xx_hal_pwr.o"
+"mcu32f030\stm32f0xx_hal_pwr_ex.o"
+"mcu32f030\stm32f0xx_hal_flash.o"
+"mcu32f030\stm32f0xx_hal_flash_ex.o"
+"mcu32f030\stm32f0xx_hal_exti.o"
+"mcu32f030\stm32f0xx_hal_tim.o"
+"mcu32f030\stm32f0xx_hal_tim_ex.o"
+"mcu32f030\system_stm32f0xx.o"
+--strict --scatter "MCU32F030\MCU32F030.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "MCU32F030.map" -o MCU32F030\MCU32F030.axf
