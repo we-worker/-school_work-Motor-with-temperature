@@ -37,8 +37,10 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 extern int Fan_PWM;
-extern uint16_t tim1_count_100us;
-extern uint16_t exit4_FG;
+extern uint16_t tim3_count_50ms;
+extern uint16_t tim3_count_1s;
+extern int Fan_speed;
+extern int Fan_count;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

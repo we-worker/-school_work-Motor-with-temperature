@@ -1,5 +1,6 @@
 --cpu Cortex-M0
 "mcu32f030\startup_stm32f030x6.o"
+"mcu32f030\control.o"
 "mcu32f030\main.o"
 "mcu32f030\stm32f0xx_it.o"
 "mcu32f030\stm32f0xx_hal_msp.o"

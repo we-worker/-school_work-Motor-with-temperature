@@ -141,30 +141,42 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI line 4 to 15 interrupts.
-  */
-void EXTI4_15_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI4_15_IRQn 0 */
-
-  /* USER CODE END EXTI4_15_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
-  /* USER CODE BEGIN EXTI4_15_IRQn 1 */
-
-  /* USER CODE END EXTI4_15_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM3 global interrupt.
   */
+
 void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
+//定时器溢出的检测
+if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
+ {
+    if (__HAL_TIM_GET_IT_SOURCE(&htim3, TIM_IT_UPDATE) != RESET)
+    {
+		 tim3_count_50ms++;
+			if(tim3_count_50ms==20)  //10s进行一次下列代码
+			{
+				tim3_count_50ms=0;   //清0
+				
+				//tim3_count_1s++;
+			}
+			__HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);//溢出中断标志位清除
+		}
+}
 
+//叶片经过的中断
+  if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_CC1) != RESET)
+  {
+    if (__HAL_TIM_GET_IT_SOURCE(&htim3, TIM_IT_CC1) != RESET)
+    {
+			//Fan_count++;
+			Fan_speed=4*1000000/9/(tim3_count_50ms*50*1000+TIM3->CCR1);
+			tim3_count_50ms=0;
+		}
+	}
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
-
+	//tim3_count_50ms++;
   /* USER CODE END TIM3_IRQn 1 */
 }
 
