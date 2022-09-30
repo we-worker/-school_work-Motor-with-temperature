@@ -5,7 +5,7 @@
 
 
 
-PID speed_pid={3.8,0,1.2,   0,0,0   ,0  ,0.2,0};
+PID speed_pid={30,1,45,   0,0,0   ,0  ,0.2,0};
 
 //Í¨ÓÃpid
 int Fan_pid(PID *s_PID, int speed)
@@ -22,6 +22,8 @@ int Fan_pid(PID *s_PID, int speed)
 	
 	if(output>pwm_LIMIT)
 		output=pwm_LIMIT;
+	if(output<0)
+		output=0;
 	return (output);
 }
 
