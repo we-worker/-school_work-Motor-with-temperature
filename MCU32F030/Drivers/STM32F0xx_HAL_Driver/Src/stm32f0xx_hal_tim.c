@@ -3942,7 +3942,7 @@ void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim)
   {
     if (__HAL_TIM_GET_IT_SOURCE(htim, TIM_IT_UPDATE) != RESET)
     {
-      __HAL_TIM_CLEAR_IT(htim, TIM_IT_UPDATE);//溢出
+      __HAL_TIM_CLEAR_IT(htim, TIM_IT_UPDATE);
 #if (USE_HAL_TIM_REGISTER_CALLBACKS == 1)
       htim->PeriodElapsedCallback(htim);
 #else

@@ -19,15 +19,17 @@ int Fan_pid(PID *s_PID, int speed)
 
 	s_PID->lastFilter = output; //ÂË²¨Öµ´æ´¢
 	s_PID->lastError = iError;	// errorÖµ´æ´¢
-
+	
+	if(output>pwm_LIMIT)
+		output=pwm_LIMIT;
 	return (output);
 }
 
 void Set_fan_speed(unsigned int val){
-	if(val>pwm_LIMIT)
-		val=pwm_LIMIT;
+	//if(val>pwm_LIMIT)
+	//	val=pwm_LIMIT;
 	
-	TIM1->CCR2=val;
+	//TIM1->CCR2=val;
 	speed_pid.target=val;
 	
 }

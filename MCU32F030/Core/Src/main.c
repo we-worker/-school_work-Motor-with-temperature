@@ -44,6 +44,7 @@ ADC_HandleTypeDef hadc;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN PV */
 int Fan_PWM=0;
@@ -57,6 +58,7 @@ static void MX_GPIO_Init(void);
 static void MX_ADC_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_TIM14_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -97,13 +99,13 @@ int main(void)
   MX_ADC_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
+  MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
 	//HAL_TIM_Base_Start_IT(&htim1);
 	HAL_TIM_Base_Start_IT(&htim3);
+	HAL_TIM_Base_Start_IT(&htim14);
 	
-	
-	//__HAL_TIM_SET_CAPTUREPOLARITY(&htim3, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_FALLING); //�?启输入捕获中断，设置下降沿触发中�?
-	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);    //启动输入捕获
+		HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);    //启动输入捕获
 	//HAL_TIM_Base_Start_IT(&htim3);
   /* USER CODE END 2 */
 
@@ -112,9 +114,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		Set_fan_speed(800);
+		Set_fan_speed(80);
 		HAL_Delay(5000);
-		Set_fan_speed(200);
+		Set_fan_speed(20);
 		HAL_Delay(5000);
     /* USER CODE BEGIN 3 */
   }
@@ -366,6 +368,36 @@ static void MX_TIM3_Init(void)
   /* USER CODE BEGIN TIM3_Init 2 */
 
   /* USER CODE END TIM3_Init 2 */
+
+}
+/**
+  * @brief TIM14 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM14_Init(void)
+{
+
+  /* USER CODE BEGIN TIM14_Init 0 */
+
+  /* USER CODE END TIM14_Init 0 */
+
+  /* USER CODE BEGIN TIM14_Init 1 */
+
+  /* USER CODE END TIM14_Init 1 */
+  htim14.Instance = TIM14;
+  htim14.Init.Prescaler = 48-1;
+  htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim14.Init.Period = 10000;
+  htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM14_Init 2 */
+
+  /* USER CODE END TIM14_Init 2 */
 
 }
 

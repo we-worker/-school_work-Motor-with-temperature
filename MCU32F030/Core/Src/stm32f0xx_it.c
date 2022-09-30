@@ -22,6 +22,7 @@
 #include "stm32f0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,7 +56,9 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim14;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -147,23 +150,23 @@ void SysTick_Handler(void)
 void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
-//定时器溢出的检测
+//????????
 if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
  {
     if (__HAL_TIM_GET_IT_SOURCE(&htim3, TIM_IT_UPDATE) != RESET)
     {
 		 tim3_count_50ms++;
-			if(tim3_count_50ms==20)  //10s进行一次下列代码
+			if(tim3_count_50ms==20)  //10s????????
 			{
-				tim3_count_50ms=0;   //清0
+				tim3_count_50ms=0;   //?0
 				
 				//tim3_count_1s++;
 			}
-			__HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);//溢出中断标志位清除
+			__HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);//?????????
 		}
 }
 
-//叶片经过的中断
+//???????
   if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_CC1) != RESET)
   {
     if (__HAL_TIM_GET_IT_SOURCE(&htim3, TIM_IT_CC1) != RESET)
@@ -179,6 +182,20 @@ if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
   /* USER CODE BEGIN TIM3_IRQn 1 */
 	//tim3_count_50ms++;
   /* USER CODE END TIM3_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM14 global interrupt.
+  */
+void TIM14_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM14_IRQn 0 */
+
+  /* USER CODE END TIM14_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim14);
+  /* USER CODE BEGIN TIM14_IRQn 1 */
+	TIM1->CCR2=Fan_pid(&speed_pid,Fan_speed);
+  /* USER CODE END TIM14_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

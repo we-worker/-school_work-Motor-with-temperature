@@ -33,3 +33,4 @@ mcu32f030\stm32f0xx_it.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr_
 mcu32f030\stm32f0xx_it.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h
 mcu32f030\stm32f0xx_it.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 mcu32f030\stm32f0xx_it.o: ../Core/Inc/stm32f0xx_it.h
+mcu32f030\stm32f0xx_it.o: ../Core/Inc/control.h

@@ -20,6 +20,7 @@ typedef struct PID
 	float lastFilter;
 } PID;
 
+extern PID speed_pid;
 
 int Fan_pid(PID *s_PID, int speed);	  //输入参数：pid结构，当前位置 返回：直线pid控制值
 
