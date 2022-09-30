@@ -50,6 +50,8 @@ TIM_HandleTypeDef htim14;
 int Fan_PWM=0;
 int Fan_speed=0;
 int Fan_count=0;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,20 +106,32 @@ int main(void)
 	//HAL_TIM_Base_Start_IT(&htim1);
 	HAL_TIM_Base_Start_IT(&htim3);
 	HAL_TIM_Base_Start_IT(&htim14);
-	
-		HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);    //启动输入捕获
+	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);    //启动输入捕获
 	//HAL_TIM_Base_Start_IT(&htim3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	
   while (1)
   {
     /* USER CODE END WHILE */
+		/*
 		Set_fan_speed(80);
 		HAL_Delay(5000);
 		Set_fan_speed(20);
 		HAL_Delay(5000);
+		*/
+		HAL_ADC_Start(&hadc);
+    //等待ADC转换完成，超时为100ms
+    HAL_ADC_PollForConversion(&hadc,100);
+    //判断ADC是否转换成功
+    if(HAL_IS_BIT_SET(HAL_ADC_GetState(&hadc),HAL_ADC_STATE_REG_EOC)){
+         //读取值
+       float v= HAL_ADC_GetValue(&hadc);
+			v=v/4096*3.3f;
+    }
+		
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

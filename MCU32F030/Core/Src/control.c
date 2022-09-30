@@ -28,12 +28,7 @@ int Fan_pid(PID *s_PID, int speed)
 }
 
 void Set_fan_speed(unsigned int val){
-	//if(val>pwm_LIMIT)
-	//	val=pwm_LIMIT;
-	
-	//TIM1->CCR2=val;
 	speed_pid.target=val;
-	
 }
 
 /* USER CODE END 1 */
