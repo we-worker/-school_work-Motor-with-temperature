@@ -170,6 +170,7 @@ if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
     {
 			//Fan_count++;
 			Fan_speed=4*1000000/9/(tim3_count_50ms*50*1000+TIM3->CCR1);
+			TIM3->CNT=0;
 			tim3_count_50ms=0;
 		}
 	}

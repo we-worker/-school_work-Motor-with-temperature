@@ -100,7 +100,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	//HAL_TIM_Base_Start_IT(&htim1);
 	HAL_TIM_Base_Start_IT(&htim3);
-	Set_fan_speed(500);
+	
 	
 	//__HAL_TIM_SET_CAPTUREPOLARITY(&htim3, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_FALLING); //�?启输入捕获中断，设置下降沿触发中�?
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);    //启动输入捕获
@@ -112,7 +112,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+		Set_fan_speed(800);
+		HAL_Delay(5000);
+		Set_fan_speed(200);
+		HAL_Delay(5000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
