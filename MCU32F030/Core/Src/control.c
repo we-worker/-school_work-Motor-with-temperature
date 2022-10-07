@@ -5,7 +5,7 @@
 
 
 
-PID speed_pid={30,1,45,   0,0,0   ,0  ,0.2,0};
+PID speed_pid={80,0.5,70,   0,0,0   ,0  ,0.2,0};
 
 //Õ®”√pid
 int Fan_pid(PID *s_PID, int speed)

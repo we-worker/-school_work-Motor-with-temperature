@@ -116,12 +116,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		/*
+		
 		Set_fan_speed(80);
 		HAL_Delay(5000);
 		Set_fan_speed(20);
 		HAL_Delay(5000);
-		*/
+		
+		/*
 		HAL_ADC_Start(&hadc);
     //等待ADC转换完成，超时为100ms
     HAL_ADC_PollForConversion(&hadc,100);
@@ -131,7 +132,7 @@ int main(void)
        float v= HAL_ADC_GetValue(&hadc);
 			v=v/4096*3.3f;
     }
-		
+		*/
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
