@@ -194,7 +194,15 @@ void TIM14_IRQHandler(void)
   /* USER CODE END TIM14_IRQn 0 */
   HAL_TIM_IRQHandler(&htim14);
   /* USER CODE BEGIN TIM14_IRQn 1 */
-	TIM1->CCR2=Fan_pid(&speed_pid,Fan_speed);
+	
+	int output=speed_pid.target*10+Fan_pid(&speed_pid,Fan_speed);
+		if(output>pwm_LIMIT)
+		output=pwm_LIMIT;
+	if(output<0)
+		output=0;
+	//TIM1->CCR2=output;
+	//TIM1->CCR1=200;
+	//TIM1->CCR2=1000;
   /* USER CODE END TIM14_IRQn 1 */
 }
 

@@ -50,7 +50,7 @@ TIM_HandleTypeDef htim14;
 int Fan_PWM=0;
 int Fan_speed=0;
 int Fan_count=0;
-
+float v;
 
 /* USER CODE END PV */
 
@@ -116,23 +116,25 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		
+		/*
 		Set_fan_speed(80);
 		HAL_Delay(5000);
 		Set_fan_speed(20);
 		HAL_Delay(5000);
+		*/
 		
-		/*
+		//pt100:0.3851Ω/℃
+		//35.2℃==2.767v
 		HAL_ADC_Start(&hadc);
     //等待ADC转换完成，超时为100ms
     HAL_ADC_PollForConversion(&hadc,100);
     //判断ADC是否转换成功
     if(HAL_IS_BIT_SET(HAL_ADC_GetState(&hadc),HAL_ADC_STATE_REG_EOC)){
          //读取值
-       float v= HAL_ADC_GetValue(&hadc);
+      v= HAL_ADC_GetValue(&hadc);
 			v=v/4096*3.3f;
     }
-		*/
+		
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -321,7 +323,7 @@ static void MX_TIM1_Init(void)
   }
   /* USER CODE BEGIN TIM1_Init 2 */
 	HAL_TIM_Base_Start(&htim1);  /* 启动tim1 */
-  //HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);  /* 启动TIM1的PWM1 */
+  HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);  /* 启动TIM1的PWM1 */
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);  /* 启动TIM1的PWM2 风扇 */
   /* USER CODE END TIM1_Init 2 */
   HAL_TIM_MspPostInit(&htim1);
