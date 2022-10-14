@@ -49,8 +49,15 @@ TIM_HandleTypeDef htim14;
 /* USER CODE BEGIN PV */
 int Fan_PWM=0;
 int Fan_speed=0;
+int Fan_speed_show=0;
 int Fan_count=0;
-float v;
+uint16_t voltage,v_fin;
+float temp;
+int temp_show;
+int heat;
+int v_tim=0;
+float temp_set=70;
+int fan_set=80;
 
 /* USER CODE END PV */
 
@@ -116,24 +123,44 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		/*
-		Set_fan_speed(80);
-		HAL_Delay(5000);
-		Set_fan_speed(20);
-		HAL_Delay(5000);
-		*/
+		
+		Set_fan_speed(fan_set);
+		//HAL_Delay(5000);
+		//Set_fan_speed(20);
+		//HAL_Delay(5000);
 		
 		//pt100:0.3851Ω/℃
-		//35.2℃==2.767v
-		HAL_ADC_Start(&hadc);
+		//35.2℃==2.767v 3434
+		while(v_tim!=10)
+		{
+			HAL_ADC_Start(&hadc);
     //等待ADC转换完成，超时为100ms
-    HAL_ADC_PollForConversion(&hadc,100);
+			HAL_ADC_PollForConversion(&hadc,10);
     //判断ADC是否转换成功
-    if(HAL_IS_BIT_SET(HAL_ADC_GetState(&hadc),HAL_ADC_STATE_REG_EOC)){
+			if(HAL_IS_BIT_SET(HAL_ADC_GetState(&hadc),HAL_ADC_STATE_REG_EOC)){
          //读取值
-      v= HAL_ADC_GetValue(&hadc);
-			v=v/4096*3.3f;
-    }
+				voltage = HAL_ADC_GetValue(&hadc);
+				if(voltage)
+				{
+					v_fin += voltage;
+					v_tim++;
+				}
+			}
+		}
+		v_tim=0;
+		v_fin = v_fin/10;
+		temp = (v_fin/4096.0f*2.78f*1100/(25-v_fin/4096.0f*2.78f)-100)/0.3851;
+		temp_show = temp;
+		v_fin = 0;
+			//voltage=voltage/4096*3.3f;
+		if(temp>temp_set+0.3) //v_fin 3450
+			heat=0;
+		else if(temp<temp_set-10) //v_fin 3350
+			heat=400;
+		else if(temp<temp_set)
+			heat=20+280*(Fan_speed/100)+(temp-60)/10*100;
+    
+		
 		
     /* USER CODE BEGIN 3 */
   }

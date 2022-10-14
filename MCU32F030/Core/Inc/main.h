@@ -41,6 +41,13 @@ extern uint16_t tim3_count_50ms;
 extern uint16_t tim3_count_1s;
 extern int Fan_speed;
 extern int Fan_count;
+extern int Fan_speed_show;
+extern uint16_t voltage,v_fin;
+extern float temp;
+extern int temp_show;
+extern int heat;
+extern float temp_set;
+extern int fan_set;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

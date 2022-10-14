@@ -52,7 +52,8 @@
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int fan_speed_sum_avg=0;
+int fan_speed_sum_avg_count=0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -159,11 +160,12 @@ if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
 			if(tim3_count_50ms==20)  //10s????????
 			{
 				tim3_count_50ms=0;   //?0
-				
 				//tim3_count_1s++;
 			}
 			__HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);//?????????
 		}
+		
+		
 }
 
 //???????
@@ -171,8 +173,18 @@ if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
   {
     if (__HAL_TIM_GET_IT_SOURCE(&htim3, TIM_IT_CC1) != RESET)
     {
-			//Fan_count++;
-			Fan_speed=4*1000000/9/(tim3_count_50ms*50*1000+TIM3->CCR1);
+			//fan_speed_sum_avg_count++;
+			Fan_speed=(4*1000000/9/(tim3_count_50ms*50*1000+TIM3->CCR1));
+			Fan_speed_show=Fan_speed;
+			/*
+			if(fan_speed_sum_avg_count>=10)
+			{	
+				Fan_speed=fan_speed_sum_avg/10;
+				fan_speed_sum_avg_count=0;
+				fan_speed_sum_avg=0;
+				Fan_speed_show=Fan_speed;
+			}
+			*/
 			TIM3->CNT=0;
 			tim3_count_50ms=0;
 		}
@@ -200,8 +212,8 @@ void TIM14_IRQHandler(void)
 		output=pwm_LIMIT;
 	if(output<0)
 		output=0;
-	//TIM1->CCR2=output;
-	//TIM1->CCR1=200;
+	TIM1->CCR2=output;
+	TIM1->CCR1=heat;
 	//TIM1->CCR2=1000;
   /* USER CODE END TIM14_IRQn 1 */
 }
