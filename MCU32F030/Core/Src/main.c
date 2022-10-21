@@ -134,7 +134,7 @@ int main(void)
 		while(v_tim!=10)
 		{
 			HAL_ADC_Start(&hadc);
-    //等待ADC转换完成，超时为100ms
+    //等待ADC转换完成，超时为10ms
 			HAL_ADC_PollForConversion(&hadc,10);
     //判断ADC是否转换成功
 			if(HAL_IS_BIT_SET(HAL_ADC_GetState(&hadc),HAL_ADC_STATE_REG_EOC)){
@@ -149,16 +149,18 @@ int main(void)
 		}
 		v_tim=0;
 		v_fin = v_fin/10;
-		temp = (v_fin/4096.0f*2.78f*1100/(25-v_fin/4096.0f*2.78f)-100)/0.3851;
+		temp = (v_fin/4096.0f*2.8f*1100/(25-v_fin/4096.0f*2.8f)-100)/0.3851;
 		temp_show = temp;
 		v_fin = 0;
 			//voltage=voltage/4096*3.3f;
-		if(temp>temp_set+0.3) //v_fin 3450
+		if(temp>temp_set+2)
 			heat=0;
-		else if(temp<temp_set-10) //v_fin 3350
-			heat=400;
+		else if(temp>temp_set+0.25)
+			heat=16*(Fan_speed/10);
+		else if(temp<temp_set-10)
+			heat=600;
 		else if(temp<temp_set)
-			heat=20+280*(Fan_speed/100)+(temp-60)/10*100;
+			heat=600+35*(Fan_speed/10)-(temp-(temp_set-10))/10*502;
     
 		
 		

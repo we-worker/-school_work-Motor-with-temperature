@@ -30,6 +30,18 @@ int Fan_pid(PID *s_PID, int speed)
 }
 
 void Set_fan_speed(unsigned int val){
+	
+	if(val<=5){
+		speed_pid.kp=20;
+		speed_pid.ki=0.5;
+		speed_pid.kd=20;
+	}
+	else if(val>7){
+		speed_pid.kp=80;
+		speed_pid.ki=1;
+		speed_pid.kd=100;
+	}
+	
 	speed_pid.target=val;
 }
 
